@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1560628892 source:c:\users\raluca\desktop\new folder\matrice\main.cpp
+	<iostream>
+	"operatii.hpp"
+
+1560629251 c:\users\raluca\desktop\new folder\matrice\operatii.hpp
+	<iostream>
+	<vector>
+	<fstream>
+	<bits/stdc++.h>
+
