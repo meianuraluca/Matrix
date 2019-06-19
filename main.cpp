@@ -9,8 +9,9 @@ int main()
     Matrix b;
     Matrix c;
     Matrix d;
-    a.matrixReading();
-    c = a.inverse();
+    cin>>a;
+    a.adjoint(a);
+    c=a;
     cout<<c;
     return 0;
 }

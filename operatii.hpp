@@ -26,18 +26,26 @@ public:
     Matrix transposed();
     Matrix inverse();
     void adjoint(Matrix);
+    int getNumberLines(){return numberLines;}
+    int getNumberColumns(){return numberColumns;}
+    void setNumberLines(int nrLines){numberLines = nrLines;}
+    void setNumberColumns(int nrColumns){numberColumns = nrColumns;}
+    void setMatrix(vector<vector<float> > matrixAux){matrix = matrixAux; }
+    vector<vector<float> > getMatrix(){return matrix;}
 };
+//class constructor without parameters
 Matrix::Matrix()
 {
     numberLines = 0;
     numberColumns = 0;
 }
+//class contructor with parameters
 Matrix::Matrix(int lines, int columns)
 {
     numberLines = lines;
     numberColumns = columns;
 }
-
+// overloading the operator >>
 istream& operator>> (istream&in,Matrix& matrixAux)
 {
     cout<<"The number of lines is: ";
@@ -53,6 +61,7 @@ istream& operator>> (istream&in,Matrix& matrixAux)
     }
     return in;
 }
+//overloading the operator <<
 ostream& operator<<(ostream&out, Matrix& matrixAux)
 {
     for(int i = 0; i < matrixAux.numberLines; i++)
@@ -63,6 +72,7 @@ ostream& operator<<(ostream&out, Matrix& matrixAux)
     }
     return out;
 }
+//function in which I read the data in the file about an object
 void Matrix::matrixReading()
 {
     ifstream fisier("data.txt");
@@ -81,6 +91,7 @@ void Matrix::matrixReading()
         matrix.push_back(linie);
     }
 }
+//overloading the operator =
 Matrix Matrix::operator=(const Matrix& matrixAux)
 {
     if (this != &matrixAux)
@@ -92,6 +103,7 @@ Matrix Matrix::operator=(const Matrix& matrixAux)
     return *this;
 
 }
+//overloading the operator +
 Matrix Matrix::operator+(Matrix& matrixAux)
 {
     Matrix result;
@@ -109,7 +121,7 @@ Matrix Matrix::operator+(Matrix& matrixAux)
     result.numberColumns = numberColumns;
     return result;
 }
-
+//overloading the operator -
 Matrix Matrix::operator-(Matrix& matrixAux)
 {
     Matrix result;
@@ -127,7 +139,7 @@ Matrix Matrix::operator-(Matrix& matrixAux)
     result.numberColumns = numberColumns;
     return result;
 }
-
+//overloading the operator *
 Matrix Matrix::operator*(Matrix& matrixAux)
 {
     Matrix result;
@@ -145,7 +157,7 @@ Matrix Matrix::operator*(Matrix& matrixAux)
     }
     return result;
 }
-
+//in this function I create the transposed matrix
 Matrix Matrix::transposed()
 {
     Matrix matrixTransposed;
@@ -168,6 +180,7 @@ Matrix Matrix::transposed()
 
     return matrixTransposed;
 }
+//function to get cofactor of matrix
 Matrix Matrix::getCofactor(Matrix matrixTrans,int line, int column, int nrLines)
 {
     Matrix matrixAux;
@@ -195,6 +208,7 @@ Matrix Matrix::getCofactor(Matrix matrixTrans,int line, int column, int nrLines)
     matrixAux.numberLines = nrLines - 1;
     return matrixAux;
 }
+//calculate the matrix determinant by using the getCofactor function
 float Matrix::determinant()
 {   Matrix matrixAux;
         matrixAux.matrix.resize(numberColumns);
@@ -212,6 +226,7 @@ float Matrix::determinant()
 
     return determ;
 }
+////in this function I create the adjoint matrix
 void Matrix::adjoint(Matrix matrixTrans)
 {
     if (numberColumns == 1)
@@ -234,6 +249,7 @@ void Matrix::adjoint(Matrix matrixTrans)
         }
     }
 }
+//in this function I create the inverse matrix using the functions defined above
 Matrix Matrix::inverse()
 {   cout<<"intru aici"<<endl;
     Matrix matrixAdj,matrixInv;
